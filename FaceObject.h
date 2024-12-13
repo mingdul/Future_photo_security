@@ -12,4 +12,4 @@ public:
     bool operator==(const FaceObject& other) const;
 };
 
-#endif // FACEOBJECT_H
+#endif

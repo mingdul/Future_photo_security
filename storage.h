@@ -30,4 +30,4 @@ public:
     }
 };
 
-#endif // STORAGE_H
+#endif

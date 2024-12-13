@@ -18,4 +18,4 @@ public:
     bool isInitialized() const; // 초기화 검증 메소드
 };
 
-#endif // FACEDETECTION_H
+#endif

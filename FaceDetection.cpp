@@ -42,5 +42,5 @@ bool FaceDetection::isInitialized() const {
 }
 
 FaceDetection::~FaceDetection() {
-    delete faceCascade;  // 동적으로 할당된 리소스 해제
+    delete faceCascade;
 }
