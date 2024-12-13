@@ -7,19 +7,15 @@
 
 class FaceDetection {
 private:
-    cv::CascadeClassifier faceCascade; // 얼굴 감지에 사용할 Haar Cascade Classifier
+    // 객체포인터 사용
+    cv::CascadeClassifier* faceCascade;
 
 public:
-    // 생성자: Haar Cascade 파일 경로를 받아 초기화
-    explicit FaceDetection(const std::string& cascadePath);
+    FaceDetection(const std::string& cascadePath); // 생성자 선언
+    ~FaceDetection(); // 소멸자 선언
 
-    // 얼굴 감지 함수: 이미지에서 얼굴 영역(cv::Rect)을 벡터로 반환
-    std::vector<cv::Rect> detectFaces(const cv::Mat& image);
-
-    // 예외처리: Cascade 초기화 실패 확인
-    bool isInitialized() const;
-
-    ~FaceDetection(); // 소멸자
+    std::vector<cv::Rect> detectFaces(const cv::Mat& image); // 얼굴 감지 메소드
+    bool isInitialized() const; // 초기화 검증 메소드
 };
 
 #endif // FACEDETECTION_H

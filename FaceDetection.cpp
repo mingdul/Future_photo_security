@@ -3,16 +3,17 @@
 #include <iostream>
 
 FaceDetection::FaceDetection(const std::string& cascadePath) {
+    faceCascade = new cv::CascadeClassifier();
     // Haar Cascade 초기화
-    if (!faceCascade.load(cascadePath)) {
+    if (!faceCascade->load(cascadePath)) {
         throw std::runtime_error("Error: Unable to load Haar Cascade file from " + cascadePath);
-    }
+    }//예외처리: Haar Cascade 로드 실패 처리
 }
 
 std::vector<cv::Rect> FaceDetection::detectFaces(const cv::Mat& image) {
     if (image.empty()) {
         throw std::invalid_argument("Error: Input image is empty.");
-    }
+    }//예외처리: 입력 이미지가 비어 있을 경우
 
     std::vector<cv::Rect> faces;
     cv::Mat grayImage;
@@ -24,7 +25,7 @@ std::vector<cv::Rect> FaceDetection::detectFaces(const cv::Mat& image) {
     cv::equalizeHist(grayImage, grayImage);
 
     // 얼굴 감지
-    faceCascade.detectMultiScale(
+    faceCascade->detectMultiScale(
         grayImage,           // 입력 이미지
         faces,               // 감지된 얼굴 영역 저장 벡터
         1.1,                 // 스케일 팩터
@@ -37,9 +38,9 @@ std::vector<cv::Rect> FaceDetection::detectFaces(const cv::Mat& image) {
 }
 
 bool FaceDetection::isInitialized() const {
-    return !faceCascade.empty();
+    return !faceCascade->empty();
 }
 
 FaceDetection::~FaceDetection() {
-    // 소멸자: 특별한 작업은 필요 없음
+    delete faceCascade;  // 동적으로 할당된 리소스 해제
 }

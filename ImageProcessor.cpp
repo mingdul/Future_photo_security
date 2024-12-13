@@ -29,3 +29,4 @@ void MaskProcessor::process(cv::Mat& image, const std::vector<cv::Rect>& regions
         cv::rectangle(image, region, maskColor, cv::FILLED);
     }
 }
+
